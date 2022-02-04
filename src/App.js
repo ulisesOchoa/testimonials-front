@@ -1,23 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import Card from "./components/Card";
+import "./scss/app.scss";
 
 function App() {
+  const url = "http://127.0.0.1:8000/api/testimonials";
+
+  const [testimonios, setTestimonios] = useState();
+
+  const fetchApi = async () => {
+    const response = await fetch(url);
+    console.log(response.statusText);
+    const responJson = await response.json();
+    setTestimonios(responJson);
+  };
+
+  useEffect(() => {
+    fetchApi();
+  }, []);
+
+  // return (
+  //
+  // )
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      {!testimonios
+        ? "cargando..."
+        : testimonios.map((testimonios, index) => {
+            return (
+              <Card
+                info={{
+                  cardColor: testimonios.txColorTestimonials,
+                  baner: testimonios.txBanerTestimonials,
+                  name: testimonios.txNombreUsuario,
+                  image: testimonios.txImgUsuario,
+                  title: testimonios.txTituloTestimonials,
+                  text: testimonios.txContenidoTestimonials,
+                  state: testimonios.txEstadoUsuario,
+                  index: "card" + index,
+                }}
+              />
+            );
+          })}
     </div>
   );
 }

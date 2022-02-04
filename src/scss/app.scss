@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&display=swap");
+
+//Globales
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: hsl(210, 46%, 95%);
+  font-family: "Barlow Semi Condensed", sans-serif;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin: 20px;
+}
+
+$breakpointMobile: 640px;
+$breakpointDesktop: 1440px;
+
+@media (min-width: $breakpointMobile) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 1600px;
+    margin: 50px auto;
+  }
+}
+
+@media (min-width: $breakpointDesktop) {
+  .container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .cards.violet {
+    grid-column: 1/3;
+  }
+
+  .cards.blackish_blue{
+    grid-column: 2/4;
+
+  }
+
+  .cards.card4 {
+    grid-column: 4;
+    grid-row: 1/3;
+  }
+}
